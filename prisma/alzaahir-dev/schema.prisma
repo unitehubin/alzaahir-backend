@@ -1,19 +1,17 @@
 generator client {
   provider        = "prisma-client-js"
   output          = "../../node_modules/@prisma/alzaahir-dev/client"
-  previewFeatures = ["fullTextIndex", "fullTextSearch"]
+  previewFeatures = ["fullTextIndex", "fullTextSearchPostgres"]
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model user_details {
-  id           Int     @id
-  username     String  @db.VarChar(55)
-  mail_id      String? @db.VarChar(55)
-  mobil_num    String? @db.VarChar(55)
-  user_status  String  @db.VarChar(45)
-  country_code String  @db.VarChar(45)
+model users {
+  id       Int    @id @default(autoincrement())
+  email    String @unique @db.VarChar(255)
+  name     String @db.VarChar(100)
+  password String @db.VarChar(255)
 }

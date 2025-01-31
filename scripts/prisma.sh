@@ -23,7 +23,7 @@ if [ -e "$ENV_FILE" ]; then
   done < "$ENV_FILE"
 
 
-  DATABASE_URL="mysql://$MYSQL_USER:$MYSQL_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME"
+  DATABASE_URL="postgresql://$MYSQL_USER:$MYSQL_PASSWORD@$DB_HOST/$DB_NAME?sslmode=require"
 
   export DATABASE_URL
   
