@@ -1,6 +1,5 @@
-import { Logger, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { CommonModule } from './common/common.modules';
-
 import { APP_FILTER } from '@nestjs/core';
 import { ExceptionHandler } from './interceptors/exception.handler';
 import { AuthModule } from './modules/auth/auth.module';
