@@ -15,4 +15,5 @@ model users {
   name     String @db.VarChar(100)
   password String @db.VarChar(255)
   active   String @db.VarChar(100)
+  role     String @db.VarChar(100)
 }

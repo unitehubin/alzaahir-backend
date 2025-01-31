@@ -9,9 +9,9 @@ export const MongooseConfig = MongooseModule.forRootAsync({
     retryAttempts: 5,
     uri: config.get('MONGO_URI'),
     connectionFactory: (connection) => {
-      connection.on('connected', () => {
+      if (connection.readyState === 1) {
         logger.log(`Mongoose DB connected to ${config.get('MONGO_URI')}`);
-      });
+      }
       connection.on('disconnected', () => {
         logger.error(
           `Mongoose DB disconnected from ${config.get('MONGO_URI')}`,
