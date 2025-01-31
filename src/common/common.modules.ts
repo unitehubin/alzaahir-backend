@@ -5,7 +5,7 @@ import configs from '../configs';
 
 const ENV = process.argv[2] || 'development';
 
-let ENV_FILE_PATH = process.cwd() + '/env/dev.env';
+const ENV_FILE_PATH = process.cwd() + '/env/dev.env';
 // add env file path based on the environment (production, development, staging)
 
 @Module({
