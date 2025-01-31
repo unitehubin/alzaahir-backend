@@ -30,6 +30,7 @@ if [ -e "$ENV_FILE" ]; then
   echo "$DATABASE_URL"
 
   # Now, run the Prisma command
+  npx prisma db push --schema prisma/alzaahir-dev/schema.prisma
   npx prisma db pull --schema prisma/alzaahir-dev/schema.prisma 
   echo "pull complete"
   npx prisma generate --schema prisma/alzaahir-dev/schema.prisma
