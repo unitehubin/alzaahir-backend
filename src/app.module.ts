@@ -3,9 +3,10 @@ import { CommonModule } from './common/common.modules';
 
 import { APP_FILTER } from '@nestjs/core';
 import { ExceptionHandler } from './interceptors/exception.handler';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [CommonModule],
+  imports: [CommonModule, AuthModule],
   controllers: [],
   providers: [
     // Logger,
