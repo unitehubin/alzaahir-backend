@@ -1,64 +1,121 @@
+# ALZAAHIR-BACKEND
 
-# Project Name
+A NestJS-based backend service with MongoDB and Prisma integration.
 
-ALZAAHIR-BACKEND
+## Overview
 
-## Getting Started
+This is a backend service built using NestJS framework, providing a robust infrastructure with MongoDB database integration through Prisma ORM.
 
-Follow these steps to set up and run the project in your local environment.
+## Tech Stack
 
-### Prerequisites
+- **Framework**: NestJS
+- **Runtime**: Node.js
+- **Database**: MongoDB (via Prisma)
+- **Package Manager**: Yarn
 
-Make sure you have the following installed:
+## Prerequisites
+
 - Node.js
 - Yarn
-- Prisma CLI (if required)
-- Mongodb
+- MongoDB
+- Prisma CLI
 
-### Installation
+## Development Setup
 
-1. Clone the repository:
+1. **Clone and Install**
+
    ```bash
    git clone <repository-url>
-   cd <project-directory>
+   cd alzaahir-backend
+   yarn install
    ```
 
-2. Install dependencies:
+2. **Environment Setup**
+   - Create `.env` file in the root directory
+   - Required variables:
+     - DATABASE_URL
+     - Other environment-specific variables
+
+3. **Database Setup**
+
    ```bash
-   yarn
+   # For Windows
+   yarn prisma:win
+   # OR scripts/prisma.bat
+
+   # For Linux/Unix
+   yarn prisma:linux
+   # OR ./scripts/prisma.sh
    ```
 
-3. Generate the Prisma Client:
-   ```bash
-   ./scripts/prishma.sh
-   ```
+## Available Scripts
 
-4. Start the application in development mode:
-   ```bash
-   yarn start:dev
-   ```
+### Development
 
----
+- `yarn start:dev`: Runs in development mode with hot-reload
+- `yarn build`: Compiles TypeScript to JavaScript
 
-## Scripts Summary
+### Database
 
-| Task                      | Command                 |
-|---------------------------|-------------------------|
-| Install packages          | `yarn`                 |
-| Generate Prisma client    | `./scripts/prishma.sh` |
-| Start development server  | `yarn start:dev`       |
+- `prisma:win`: Windows script for Prisma operations
+- `prisma:linux`: Linux script for Prisma operations
+  - Generates Prisma client
+  - Applies database migrations
 
----
+## Project Structure
 
-## Notes
+```
+alzaahir-backend/
+├── src/
+│   ├── app.module.ts              # Main application module
+│   └── prisma/                    # Database
+│       └── schema.prisma          # Prisma schema
+│
+├── scripts/                       # Utility Scripts
+│   ├── prisma.sh                 # Unix Prisma script
+│   └── prisma.bat                # Windows Prisma script
+│
+└── test/                         # Test Files
+```
 
-- Ensure your database is configured correctly in the `prisma` schema file before running the Prisma generation script.
-- Update `.env` with the required environment variables.
+### Core Components
 
----
+1. **App Module**
+   - Root module of the application
+   - Configures core NestJS setup
+   - Manages dependency injection
+
+2. **Database Layer**
+   - Prisma ORM integration
+   - Database schema definition
+   - Migration management
+
+### Database Structure
+
+The application uses MongoDB through Prisma:
+
+- Provides type-safe database access
+- Handles database migrations
+- Manages database schema
+
+### Error Handling
+
+- Global exception filters
+- Structured error responses
+- Basic error logging
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under the MIT License.
 
-Happy coding! 🚀
+---
+
+**Note**: This documentation reflects the current state of the codebase. As new modules and features are added, this documentation should be updated accordingly.
