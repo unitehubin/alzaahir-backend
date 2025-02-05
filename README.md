@@ -104,6 +104,130 @@ The application uses MongoDB through Prisma:
 - Structured error responses
 - Basic error logging
 
+## Authentication API Documentation
+
+### Endpoints
+
+#### 1. Email Login
+
+```http
+POST /auth/login
+```
+
+**Request Body:**
+
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": "Logged in successfully"
+}
+```
+
+* Sets HTTP-only cookie `auth_token`
+
+#### 2. Google OAuth
+
+```http
+GET /auth/google
+```
+
+* Redirects to Google login
+
+```http
+GET /auth/google/callback
+```
+
+* Handles Google OAuth callback
+- Sets HTTP-only cookie `auth_token`
+
+#### 3. Logout
+
+```http
+POST /auth/logout
+```
+
+**Response:**
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+* Clears `auth_token` cookie
+
+### Authentication Flow
+
+#### JWT Cookie Authentication
+
+- Tokens are stored in HTTP-only cookies
+- Cookie name: `auth_token`
+- Expiration: 1 hour
+- Security features:
+  - HTTP-only: Yes
+  - Secure: Yes (in production)
+  - SameSite: Lax
+
+## Architecture Documentation
+
+### Authentication Module
+
+```
+src/modules/auth/
+├── auth.module.ts           # Module configuration
+├── auth.controller.ts       # Route handlers
+├── auth.service.ts         # Business logic
+└── strategies/            # Passport strategies
+    ├── jwt.strategy.ts    # JWT authentication
+    └── google.strategy.ts # Google OAuth
+```
+
+#### Components
+
+1. **AuthModule**
+   - Configures JWT and Passport
+   - Imports PrismaModule for database access
+   - Registers strategies and services
+
+2. **AuthService**
+   - Handles user validation
+   - Manages JWT token generation
+   - Implements login/OAuth logic
+
+3. **AuthController**
+   - Exposes authentication endpoints
+   - Manages cookie-based responses
+   - Implements OAuth callbacks
+
+4. **Strategies**
+   - JWT: Extracts token from cookies
+   - Google: Handles OAuth2 authentication
+
+#### Security Features
+
+1. **Token Storage**
+   - HTTP-only cookies prevent XSS attacks
+   - Secure flag in production
+   - SameSite policy for CSRF protection
+
+2. **OAuth Integration**
+   - Google OAuth2 implementation
+   - Secure profile information handling
+   - Automatic user creation/linking
+
+3. **Password Security**
+   - Hashed password storage
+   - Secure password comparison
+   - No plain-text password transmission
+
 ## Contributing
 
 1. Fork the repository
