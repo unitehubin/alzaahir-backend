@@ -8,7 +8,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async validateUser(email: string, password: string) {
     const user = await this.prisma.users.findUnique({ where: { email } });
@@ -22,7 +22,7 @@ export class AuthService {
   async login(user: any, res: Response) {
     const payload = { email: user.email, sub: user.id };
     const token = this.jwtService.sign(payload);
-    
+
     res.cookie('auth_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -44,7 +44,10 @@ export class AuthService {
           email: profile.email,
           name: profile.name,
           googleId: profile.id,
-        },
+          password: '', // Add default values for required fields
+          active: 'true',
+          role: 'USER'
+        }
       });
     }
 
